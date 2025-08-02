@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ToDo List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      padding: 20px;
+    }
+    h2 {
+      color: #333;
+    }
+    .container {
+      display: flex;
+      gap: 40px;
+    }
+    .box {
+      background: #fff;
+      padding: 20px;
+      border: 1px solid #ccc;
+      width: 45%;
+      border-radius: 8px;
+    }
+    .task {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+    }
+    .task input[type="text"] {
+      border: none;
+      background: transparent;
+      width: 70%;
+    }
+    .task-actions button {
+      margin-left: 5px;
+    }
+    #newTask {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2>My ToDo List</h2>
+  <input type="text" id="newTask" placeholder="Write a task...">
+  <button onclick="addTask()">Add Task</button>
+
+  <div class="container">
+    <div class="box">
+      <h3>ToDo</h3>
+      <div id="todoList"></div>
+    </div>
+
+    <div class="box">
+      <h3>Finished</h3>
+      <div id="doneList"></div>
+    </div>
+  </div>
+
+  <script>
+    function createTaskElement(text, isDone = false) {
+      const div = document.createElement('div');
+      div.className = 'task';
+
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.value = text;
+      input.disabled = true;
+
+      const actions = document.createElement('div');
+      actions.className = 'task-actions';
+
+      const editBtn = document.createElement('button');
+      editBtn.textContent = 'Edit';
+      editBtn.onclick = function () {
+        input.disabled = !input.disabled;
+        editBtn.textContent = input.disabled ? 'Edit' : 'Save';
+      };
+
+      const delBtn = document.createElement('button');
+      delBtn.textContent = 'Delete';
+      delBtn.onclick = function () {
+        div.remove();
+      };
+
+      const checkBtn = document.createElement('button');
+      checkBtn.textContent = isDone ? 'Undo' : 'Done';
+      checkBtn.onclick = function () {
+        div.remove();
+        if (isDone) {
+          document.getElementById('todoList').appendChild(createTaskElement(input.value, false));
+        } else {
+          document.getElementById('doneList').appendChild(createTaskElement(input.value, true));
+        }
+      };
+
+      actions.appendChild(editBtn);
+      actions.appendChild(delBtn);
+      actions.appendChild(checkBtn);
+
+      div.appendChild(input);
+      div.appendChild(actions);
+
+      return div;
+    }
+
+    function addTask() {
+      const input = document.getElementById('newTask');
+      const text = input.value.trim();
+      if (text !== '') {
+        const task = createTaskElement(text);
+        document.getElementById('todoList').appendChild(task);
+        input.value = '';
+      }
+    }
+  </script>
+</body>
+</html>
