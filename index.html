@@ -2,55 +2,100 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>ToDo List</title>
+  <title>To Do List</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f9f9f9;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f6f8;
+      margin: 0;
       padding: 20px;
     }
     h2 {
-      color: #333;
+      color: #222;
+      text-align: center;
     }
     .container {
       display: flex;
-      gap: 40px;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-top: 20px;
     }
     .box {
       background: #fff;
       padding: 20px;
-      border: 1px solid #ccc;
-      width: 45%;
-      border-radius: 8px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      width: 48%;
+      min-height: 200px;
+      margin-bottom: 20px;
     }
     .task {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 8px 0;
-      border-bottom: 1px solid #eee;
+      padding: 10px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .task:last-child {
+      border-bottom: none;
     }
     .task input[type="text"] {
       border: none;
       background: transparent;
-      width: 70%;
+      width: 65%;
+      font-size: 15px;
+      color: #333;
+    }
+    .task input[type="text"]:disabled {
+      color: #666;
     }
     .task-actions button {
       margin-left: 5px;
+      padding: 5px 8px;
+      font-size: 12px;
+      cursor: pointer;
+      border: none;
+      border-radius: 4px;
+      background-color: #eee;
+      transition: background 0.2s;
+    }
+    .task-actions button:hover {
+      background-color: #ddd;
     }
     #newTask {
-      margin-bottom: 10px;
+      padding: 8px;
+      width: 70%;
+      margin-right: 10px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+    button.add {
+      padding: 8px 12px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button.add:hover {
+      background-color: #0056b3;
+    }
+    .input-area {
+      text-align: center;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
-  <h2>My ToDo List</h2>
-  <input type="text" id="newTask" placeholder="Write a task...">
-  <button onclick="addTask()">Add Task</button>
+  <h2>My To Do List</h2>
+  <div class="input-area">
+    <input type="text" id="newTask" placeholder="Write a task...">
+    <button class="add" onclick="addTask()">Add Task</button>
+  </div>
 
   <div class="container">
     <div class="box">
-      <h3>ToDo</h3>
+      <h3>To Do</h3>
       <div id="todoList"></div>
     </div>
 
